@@ -1,0 +1,11 @@
+
+一个参数的构造函数在代码中new时使用
+两个参数的构造函数在布局中使用
+三个参数的构造函数也在布局中使用，布局文件多了样式
+
+子 View 的onTouch 方法返回 false 的话，在 Down 事件之后父布局将不会再把后续的
+MOVE事件交给子 View去处理，即不再调用子 View的 dispatchTouchEvent方法，
+最终也就调用不到子 View的onTouch方法。而是由父布局拦截。
+
+canvas 的sava 和 restore方法用于保存及回退 canvas画布的状态
+因为画布可以平移也可以旋转，但是平移或旋转之前画的图案不会变

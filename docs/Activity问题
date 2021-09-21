@@ -1,0 +1,28 @@
+
+1、Activity A -> B -> A
+
+A : onPause
+B : onCreate
+B : onStart
+B : onResume
+A : onStop
+B : onPause
+A : onRestart
+A : onStart
+A : onResume
+B : onStop
+B : onDestroy
+
+
+ 2、A退回桌面又回到A
+   D/MainActivity: onPause
+   D/MainActivity: onStop
+   D/MainActivity: onRestart
+   D/MainActivity: onStart
+   D/MainActivity: onResume
+
+ 3、A有对话框情况下退回桌面然后又返回A
+    与上同。亲测，对话框不影响Activity的生命周期。
+
+    compileSdkVersion : 编译工具版本
+    targetSdkVersion ： 基于那个版本的 SDK进行开发

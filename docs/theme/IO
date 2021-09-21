@@ -1,0 +1,20 @@
+
+ /**********************   IO   ************************/
+
+ 基类        InputStream         OutputStream         Reader          Writer
+
+ 访问文件    FileInputStream     FileOutputStream     FileReader      FileWriter
+
+ 缓冲流      BufferedInputStream BufferedOutputStream BufferedReader   BufferedWriter
+  （使用上和访问文件流基本一致，只是会创建缓冲区，在缓冲区读写数据比IO快）
+  （字符缓冲流readLine（）方法可以一次读取一行内容）
+
+ 对象流     ObjectInputStream   ObjectOutputStream
+
+ 处理流（打印流）                PrintStream                           PrintWriter
+
+ 转换流（用于将字节流包装成字符流）                    InputStreamReader  OutputStreamWriter
+
+        RandomAccessFile 任意访问，功能强大。
+
+ NIO ：同步非阻塞式的IO操作，缓冲区、多通道

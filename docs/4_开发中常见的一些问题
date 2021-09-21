@@ -1,0 +1,42 @@
+
+1、ListView 中图片错位的问题是如何产生的?
+   View的复用。
+
+2、屏幕适配的处理技巧都有哪些?
+3、服务器只提供数据接收接口，在多线程或多进程条件下，如何保证数据的有序到达？
+4、动态布局的理解
+5、怎么去除重复代码？
+   切面编程。
+
+6、画出 Android 的大体架构图
+   应用层 -> Framework层 -> 函数库、vm -> Linux kernel
+
+7、RecyclerView和ListView的区别
+   RecyclerView复用ViewHolder
+   布局 : ListView由自身管理布局，布局样式有限。 RecyclerView由LayoutManager管理布局。
+   缓存 : ListView 三级缓存、RecyclerView四级缓存。
+   事件监听 : ListView提供了点击事件监听器，RecyclerView需要手动实现。
+   刷新机制 : ListView 每次数据更新都刷新整个列表，RecyclerView提供单个item View的刷新功能。
+   动画 : RecyclerView数据刷新时提供动画接口。
+
+
+8、ListView图片加载错乱的原理和解决方案
+9、动态权限适配方案，权限组的概念
+   权限组 : 同一组的任何一个权限被授权了，其他权限也自动被授权。
+
+10、下拉状态栏是不是影响activity的生命周期
+     不影响。亲测。
+
+11、如果在onStop的时候做了网络请求，onResume的时候怎么恢复？
+12、Bitmap 使用时候注意什么？
+    采样，及时回收。
+
+13、Bitmap的recycler()
+14、Android中开启摄像头的主要步骤
+15、ViewPager使用细节，如何设置成每次只初始化当前的Fragment，其他的不初始化？
+16、点击事件被拦截，但是想传到下面的View，如何操作？
+    child.dispatchTouchEvent
+
+17、微信主页面的实现方式
+18、微信上消息小红点的原理
+19、CAS介绍

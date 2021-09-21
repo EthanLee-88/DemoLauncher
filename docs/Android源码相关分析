@@ -1,0 +1,91 @@
+
+1、Android动画框架实现原理
+   属性动画要求动画作用的对象提供该属性的set和get方法。
+   属性动画根据外界传递的初始值和最终值，以动画的效果多次去调用set方法。
+   随着时间的推移，set的值越来越接近最终值。
+
+2、Android各个版本API的区别
+
+3、RequestLayout，onLayout，onDraw，DrawChild区别与联系
+   RequestLayout : 向上请求重新布局，最终会完成测量、布局、绘制三大流程。
+   onLayout : ViewGroup用于确定子元素的位置。
+   onDraw : 绘制自己
+   DrawChild : 绘制子View
+
+4、invalidate和postInvalidate的区别及使用
+   invalidate : 当子View调用了invalidate方法后，会为该View添加一个标记位，
+       同时不断向父容器请求刷新，父容器通过计算得出自身需要重绘的区域，直到传递
+       到ViewRootImpl中，最终触发performTraversals方法，进行开始View树重绘流
+       程(只绘制需要重绘的视图)。
+   postInvalidate : 这个方法与invalidate方法的作用是一样的，都是使View树重绘，
+       但两者的使用条件不同，postInvalidate是在非UI线程中调用，invalidate则是在UI
+       线程中调用。
+   一般来说，如果View确定自身不再适合当前区域，比如说它的LayoutParams发生了改变，
+   需要父布局对其进行重新测量、布局、绘制这三个流程，往往使用requestLayout。而
+   invalidate则是刷新当前View，使当前View进行重绘，不会进行测量、布局流程，因此
+   如果View只需要重绘而不需要测量，布局的时候，使用invalidate方法往往比requestLayout
+   方法更高效。
+
+5、Activity-Window-View三者的差别
+   Activity中包含一个PhoneWindow，PhoneWindow中包含一个DecorView，DecorView里包含
+   一个ContentView。PhoneWindow通过WindowManager来管理View。
+
+6、谈谈对Volley的理解
+   OkHttp
+
+7、如何优化自定义View
+   不要在onDraw里有耗时操作，ViewGroup解决滑动冲突
+
+8、低版本SDK如何实现高版本api？
+9、描述一次网络请求的流程
+
+10、HttpUrlConnection 和 okHttp关系
+11、Bitmap对象的理解          位图，通常与BitmapFactory配合使用
+12、looper架构
+    消息循环，每个线程都有Looper，Looper会无限循环地查找新的消息
+    当无新的消息则会一致等待，有新的消息是则处理消息。
+    ThreadLocal : 线程内部的数据存储类，通过它可以在指定线程冲存储数据。
+
+13、ActivityThread，AMS，WMS的工作原理
+14、自定义View如何考虑机型适配
+15、自定义View的事件
+16、AsyncTask+HttpClient 与 AsyncHttpClient有什么区别？
+17、LaunchMode应用场景
+18、AsyncTask 如何使用?
+19、SpareArray原理
+20、请介绍下ContentProvider 是如何实现数据共享的？
+21、Android Service与Activity之间通信的几种方式
+22、IntentService原理及作用是什么？
+    IntentService是一个抽象类需要继承，IntentService内部串行执行后台任务，
+    任务执行完后会自动停止，有新任务时需要重新启动。其使用流程和普通的Service
+    类似。IntentService时Service，优先级较高，适合执行优先级较高的任务。而普通
+    的线程优先级较低。
+
+23、说说Activity、Intent、Service 是什么关系
+24、ApplicationContext和ActivityContext的区别
+
+25、SP是进程同步的吗?有什么方法做到同步？
+    Context.MODE_PRIVATE : 进程私有。
+    Context.MODE_WORLD_READABLE : 其他进程可写。 // 已弃用
+    Context.MODE_WORLD_WRITEABLE : 其他进程可读。 // 已弃用
+
+    SP以XML形式保存，涉及IO操作，commit方法在主线程中执行，apply方法在子线程中执行。
+
+    commit会直接写入磁盘，返回结果。所以当需要立即得到结果时就是用 commit。
+    apply 会先写入内存再异步写入磁盘。如果频繁操作 apply会将最后改动的结果
+    存入磁盘，此情境下性能优于 commit。
+
+    SP内部加了锁，实现线程安全，但进程不安全。实现进程同步可加同步锁或SP私有化，通过进程间
+    通信向外提供访问接口。
+    SP有备份机制，读写操作异常时可恢复数据。
+
+26、谈谈多线程在Android中的使用
+27、
+28、进程和 Application 的生命周期
+29、封装View的时候怎么知道view的大小
+    onMeasure方法里从MeasureSpec对象中获取。
+
+30、RecycleView原理
+
+31、AndroidManifest的作用与理解
+    清单文件，全局描述文件。包含应用名称、图标、使用的组件及权限声明等。

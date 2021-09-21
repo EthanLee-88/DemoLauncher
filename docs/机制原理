@@ -1,0 +1,119 @@
+
+1、Handler机制和底层实现
+   Handler有三种实现方法 : 派生子类重写handleMessage方法、new Handler(callBack);
+           callBack为Runnable、New Handler(getMainLooper);
+   MessageQueue : 消息队列，插入和读取 ，enqueueMessage、next；
+   Looper : 消息循环，运行在所创建的线程，除了主线程的Looper默认已创建外，其他线程
+            均需手动创建。loop会无限循环查找消息队列的消息，并在Looper内调用Handler的
+            方法处理消息。
+
+2、Handler、Thread和HandlerThread的差别
+
+3、handler发消息给子线程，looper怎么启动？
+   Looper.prepare() -> new Handle() -> Looper.loop();
+   loop();方法执行后，Looper开始无限循环。使用完后建议手动退出。
+
+4、关于Handler，在任何地方new Handler 都是什么线程下?
+
+5、ThreadLocal原理，实现及如何保证Local属性？
+   ThreadLocal内部维护了不同线程的localValue对象及数组，当不同线程访问ThreadLocal
+   的方法时，会判断不同的线程返回对应线程的对象的数组。
+
+6、请解释下在单线程模型中Message、Handler、Message Queue、Looper之间的关系
+
+7、请描述一下View事件传递分发机制
+   dispatchTouchEvent() 、onInterceptTouchEvent()、onTouchEvent（）
+
+8、Touch事件传递流程
+
+9、事件分发中的onTouch 和onTouchEvent 有什么区别，又该如何使用？
+   onTouch 是 OnTouchListener 接口的方法，当View设置OnTouchListener后，onTouch方法
+   会被调用，此方法返回false时 onTouchEvent才会被调用，否则不会被调用。
+   OnClickListener的优先级则是最低的。
+
+10、View和ViewGroup分别有哪些事件分发相关的回调方法
+    View没有onInterceptTouchEvent方法，一旦事件传递给它，则默认由它处理。
+
+11、View刷新机制
+12、View绘制流程
+13、自定义控件原理
+14、自定义View如何提供获取View属性的接口？
+    自定义属性集。在values文件夹下自定义属性集，在自定义View时在构造方法里解析相关属性，
+    然后在布局文件XML里就可以使用了。
+
+15、Android代码中实现WAP方式联网
+16、AsyncTask机制
+    AsyncTask封装了 Thread和Handler，主要重写方法 : onPreExecute 、 doInBackground
+    onProgressUpdate 、 onPostExecute ，除了doInBackground外其余都运行在主线程。
+    AsyncTask的实例必须在主线程中创建，调用execute方法提交任务参数，而不是直接调用以上
+    四种重写方法。
+
+17、AsyncTask原理及不足
+    3.0开始为了避免并发错误，execute 默认串行执行任务，进程内的所有AsyncTask共同使用
+    一个线程池，AsyncTask不适合太耗时的任务。
+
+18、如何取消AsyncTask？
+    调用finish。
+
+19、为什么不能在子线程更新UI？
+    不安全。
+
+20、ANR产生的原因是什么？
+    在主线程中执行耗时操作。
+
+21、ANR定位和修正
+
+
+22、oom是什么？
+    内存溢出
+
+23、什么情况导致oom？
+    内存不够用
+
+24、有什么解决方法可以避免OOM？
+    内存优化
+
+25、Oom 是否可以try catch？为什么？
+26、内存泄漏是什么？
+    该被回收销毁的对象没有没销毁。
+
+27、什么情况导致内存泄漏？
+    静态变量持有对象、单例模式持有对象、属性动画未释放。
+
+28、如何防止线程的内存泄漏？
+    及时回收
+
+29、内存泄露场的解决方法
+
+30、内存泄漏和内存溢出区别？
+
+31、LruCache默认缓存大小
+    一般设置成进程容量的 1/8
+
+32、ContentProvider的权限管理(解答：读写分离，权限控制-精确到表级，URL控制)
+
+33、如何通过广播拦截和abort一条短信？
+        首先添加接收短信的权限
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+        在清单文件中注册广播接收器，设置该广播接收器优先级,尽量设高一点。
+        创建一个 BroadcastReceiver 来实现广播的处理，并设置拦截器 abortBroadcast()。
+
+34、广播是否可以请求网络？
+    不可以，广播需在主线程中收发。
+
+35、广播引起anr的时间限制是多少？
+    10秒，Activity是5秒。
+
+36、计算一个view的嵌套层级
+37、Activity栈
+38、Android线程有没有上限？
+39、线程池有没有上限？
+40、ListView重用的是什么？
+    View
+
+41、Android为什么引入Parcelable？
+    可序列化接口
+
+42、有没有尝试简化Parcelable的使用？
+
+内存分析 : AS Profiler

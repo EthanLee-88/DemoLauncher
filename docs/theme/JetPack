@@ -1,0 +1,18 @@
+
+/********** LifeCycle **********/
+
+ LifeCycle用于Activity/Fragment生命周期的托管，或者说监听，监听更准确一点。第三方作为
+ 观察者，生命周期的拥有者LifecycleOwner就是Activity/Fragment。第三方实现LifecycleObserver
+ 接口就可实现观察者角色，观察者生命周期的方法用注解@OnLifeCycleEvent标注。
+
+ ViewModel
+          Android提供ViewModel组件，使用时自定义一个类继承ViewModel即可，然后在Activity
+          里使用ViewModelProviders工厂模式创建自定义的Model对象。ViewModel的生命周期不会
+          跟随Activity的销毁和重建。
+
+ LiveData ：类似于RXJava，提供观察者模式，不同的是，LiveData可感知组件的生命周期。
+          LiveData提供一个实现类MuTableLiveData，LiveData通过PostValue和setValue
+          方法来发送消息，PostValue可运行于子线程。LiveData提供Observer接口及onChange
+          方法回调数据。
+          LiveData和ViewModel配合使用时，ViewModel持有LiveData的对象，外界组件通过
+          ViewModel获取LiveData对象，来实现数据监听。

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_layout"
+    tools:context=".MainActivity">
+    <com.example.demolauncher.util.MyViewGroup
+        android:id="@+id/my_view"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <TextView
+            android:id="@+id/child_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="one"
+            android:background="@color/colorAccent"
+            />
+        <TextView
+            android:id="@+id/child_two"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="two"
+            android:background="@color/red"
+            />
+    </com.example.demolauncher.util.MyViewGroup>
+
+    <Button
+        android:id="@+id/button_messenger"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="messenger_service"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <Button
+        android:id="@+id/button_aidl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="aidl_service"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_messenger"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <Button
+        android:id="@+id/button_provider"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="provider"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_aidl"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <Button
+        android:id="@+id/button_socket"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="socket"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_provider"
+        app:layout_constraintWidth_percent="0.9" />
+    <com.example.demolauncher.view.MyTextView
+        android:id="@+id/my_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"
+        app:MyTextSize="30sp"
+        app:MyTextColor="@color/red"
+        app:MyText="碧云天"
+        app:layout_constraintTop_toBottomOf="@+id/button_socket"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <com.example.demolauncher.view.MyStepView
+        android:id="@+id/my_step_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:StepTargetSteps="6000"
+        app:StepCurrentSteps="5000"
+        app:StepBorderWidth="12dp"
+        app:StepTextColor="@color/black"
+        app:StepTextSize="38sp"
+        app:OuterBorderColor="@color/grey"
+        app:InnerBorderColor="@color/actionsheet_blue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_socket"
+        />
+    <com.example.demolauncher.view.DiscolourTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="碧云天"
+        android:visibility="gone"
+        app:ChangeColor="@color/red"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_socket"
+        />
+    <com.example.demolauncher.view.ColorTrackTextView
+        android:id="@+id/color_track_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="长亭外，古道边"
+        app:origin_color="@color/black"
+        app:change_color="@color/red"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_socket"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

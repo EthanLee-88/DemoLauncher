@@ -1,0 +1,82 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "98fe97d1e56fcfbee10cf98efeed96cd",
+    "entities": [
+      {
+        "tableName": "heartRate",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`data_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_id` TEXT, `account` TEXT, `heart_rate` INTEGER NOT NULL, `ecg_img_url` TEXT, `time_millis` INTEGER NOT NULL, `measure_status` INTEGER NOT NULL, `remark` TEXT, `data_sign` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "did",
+            "columnName": "data_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uid",
+            "columnName": "user_id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "account",
+            "columnName": "account",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "heartRate",
+            "columnName": "heart_rate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ecgImg",
+            "columnName": "ecg_img_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "timeMillis",
+            "columnName": "time_millis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "measure_status",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remark",
+            "columnName": "remark",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sign",
+            "columnName": "data_sign",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "data_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '98fe97d1e56fcfbee10cf98efeed96cd')"
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+
+
+    /***********************  消息机制   *********************/
+
+    Handler 有三种实现方式 ：
+                            （1）继承Handler重写handleMessage方法。
+                            （2）构造器传入Callback接口实现类对象（回调）
+                            （3）调用post方法传入Runnable对象。
+    第一第二种方法侧重于显示地发消息（Message），第三种方法侧重于目的地的任务执行。值得一提
+    的是，Runnable对象最终也会打包成Message对象插入任务队列（Message内含有Runnable变量）。
+
+    Handler发消息是在当前线程，处理消息是在创建Handler的线程。Handler在创建时持有创建所在线程
+    的Looper的引用，消息最终在Looper的loop方法里得到处理。loop方法会调用Handler的dispatchMessage
+    方法处理消息。
+    可以说Handler在创建时持有创建所在线程的Looper，就相当于把消息的处理权给了该线程。
+
+    Looper ：提供prepare方法创建实例，并由ThreadLocal对象将所创建的Looper对象赋给调用prepare
+             方法的Thread线程对象。（ThreadLocal通过Thread.currentThread()获取当前线程）
+             Looper对象在初始化的时候回创建并持有消息队列MessageQueue的实例，并且持有所在线程的
+             引用。
+             可以说Thread实例通过数据结构持有Looper对象，Looper则持有MessageQueue对象。
+
+    // 消息队列的阻塞
+    消息队列的next方法是通过调用一个本地方法nativePollOnce(long ptr, int timeoutMillis)来实现
+    线程阻塞，此方法是一个native方法，内部涉及到IO多路复用机制（epoll），在native层实现类似于
+    线程等待和唤醒的机制，当传入的参数timeoutMillis为0时立即返回，不阻塞。当传入是负数是则无限期
+    阻塞。当传入正数时则显示阻塞。
+    该阻塞有同为本地方法的nativeWake(long ptr)唤醒。
+
+    //
+    消息队列里的消息分为同步消息（普通消息）、异步消息及屏障消息。
+
+    屏障消息里target为null，用于阻止后续同步消息的执行，让异步消息获得优先执行权。
+    在API里插入屏障消息的方法被隐藏（hide），可用反射调用。
+    屏障插入后，会返回一个整型值token，此值会被赋给message的arg1标签，解除屏障
+    时需要使用token。
+
+    消息一般默认为同步消息，若想插入异步消息，则可以通过message.setAsynchronous()方法
+    设置异步标志。
+
+    Message消息的获取通过静态方法obtain（），其内部维护一个链表，最多可复用50个Message
+    若消息池为空，则通过new的方式来创建。
+    Message通过recycle（）方法将使用完的消息格式化后放入消息池中。
+    消息队列最终会将Runnable对象打包成Message对象，将Runnable对象赋给Message的callback
+    变量。
+    对象的复用使用了享元模式。
+
+    //java虚拟机栈
+    线程申请的容量大于虚拟机允许的容量，则会发生 StackOverflowError
+    当虚拟机动态扩展时无法申请到足够的内存时会抛出 OutOfMemoryError 异常。
+    当在多线程的情形下，虚拟机无法为线程的动态扩展提供足够的内存，则可能会发生oom。
+
+    IdleHandler是消息队列MessageQueue的一个用于闲时执行任务的接口。外界可以通过MessageQueue
+    的addIdleHandler的方法来添加接口实现类对象，这些对象将保存在消息队列MessageQueue的一个
+    数组列表mIdleHandlers中，闲时执行。接口里的方法queueIdle执行完后会有一个布尔型返回值，
+    如果返回false，该任务将被从列表中移除，如果返回true，该任务将闲时重复执行。
+

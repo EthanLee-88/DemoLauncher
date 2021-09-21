@@ -1,0 +1,15 @@
+
+当子View的onTouchEvent方法返回false，则表明当前的View不消耗事件，事件将交由父布局的onTouchEvent
+      消耗。
+      requestDisallowInterceptTouchEvent（boolean in）；用于禁止当前的布局拦截事件，标志位默认为false
+      如果设置为true，布局的onInterceptTouchEvent（）将不会拦截事件。
+      开发过程当中一般将ACTION_DOWN事件交给子View去处理，子View通过自身逻辑决定是否拦截后续事件，或者
+      是否消耗事件。
+
+自定义View的动画可以使用Scroller及scrollTo实现，View的getScrollX()方法获取的是屏幕左边界在X轴
+      的位置。scroller.computeScrollOffset()返回true时说明变换没结束。scroller.getCurrX()方法
+      获取当前变换到的位置。
+      invalidate();方法被调用后，会触发computeScroll()方法，可实现循环刷新的效果。
+
+      事件滑动速度的监听可以使用VelocityTracker，事件被触发后，将MotionEvent添加到VelocityTracker
+      中，ACTION_UP时通过getXVelocity方法计算出速度。

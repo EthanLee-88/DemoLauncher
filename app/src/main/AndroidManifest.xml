@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.demolauncher">
+    <permission
+        android:name="com.example.demolauncher.permission.ACCESS_HEROES_SERVICE"
+        android:protectionLevel="normal"
+        />
+    <uses-permission android:name="com.example.demolauncher.permission.ACCESS_HEROES_SERVICE"/>
+    <uses-permission android:name="com.launcher.PROVIDER"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.PERMISSIONS_STORAGE"/>
+    <application
+        android:name=".application.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/碧云天"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".intentservice.IntentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".mvp.simple2.MvpActivity"
+            android:screenOrientation="fullSensor"
+            />
+        <activity
+            android:name=".messenger.MessengerActivity"
+            android:screenOrientation="fullSensor"
+            />
+
+        <service
+            android:name=".messenger.MessengerService"
+            android:process=":remote"
+            />
+
+        <activity
+            android:name=".aidl.AidlActivity"
+            />
+        <service
+            android:name=".aidl.AidlService"
+            android:process=":remote"
+            android:enabled="true"
+            android:exported="true"
+            />
+
+        <provider
+            android:name=".provider.HeroesProvider"
+            android:authorities="com.example.demolauncher.hero.provider"
+            android:exported="true"
+            >
+        </provider>
+        <activity
+            android:name=".provider.ProviderActivity"
+            />
+
+        <service
+            android:name=".socket.ServerSocketService"
+            android:process=":remote"
+            android:exported="true"
+            />
+        <activity
+            android:name=".socket.SocketClientActivity"
+            />
+        <activity
+            android:name=".ecg.EcgActivity"
+            />
+        <service android:name=".intentservice.SimpleService"/>
+    </application>
+
+</manifest>
